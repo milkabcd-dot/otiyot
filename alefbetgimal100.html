@@ -1,213 +1,116 @@
-import React, { useState } from 'react';
-
-const HebrewLearningGame = () => {
-  const svgImages = {
-    'א': (
-      <svg width="60" height="60" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="30" cy="35" r="12" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="90" cy="35" r="12" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="30" cy="70" r="10" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="90" cy="70" r="10" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="45" cy="25" r="10" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="75" cy="25" r="10" fill="#F4A460" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="60" cy="50" r="28" fill="#FFD700" stroke="#D2691E" strokeWidth="3"/>
-        <circle cx="40" cy="32" r="8" fill="#FFD700" stroke="#D2691E" strokeWidth="2.5"/>
-        <circle cx="80" cy="32" r="8" fill="#FFD700" stroke="#D2691E" strokeWidth="2.5"/>
-        <circle cx="50" cy="45" r="4" fill="#333"/>
-        <circle cx="70" cy="45" r="4" fill="#333"/>
-        <ellipse cx="60" cy="55" rx="5" ry="6" fill="#D2691E"/>
-        <path d="M 52 60 Q 60 65 68 60" stroke="#D2691E" strokeWidth="2.5" fill="none" strokeLinecap="round"/>
-        <ellipse cx="60" cy="95" rx="22" ry="18" fill="#FFD700" stroke="#D2691E" strokeWidth="3"/>
-        <path d="M 82 95 Q 100 85 105 80" stroke="#D2691E" strokeWidth="3" fill="none" strokeLinecap="round"/>
-        <circle cx="105" cy="77" r="5" fill="#F4A460" stroke="#D2691E" strokeWidth="2"/>
-      </svg>
-    ),
-    'ב': (
-      <svg width="60" height="60" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <path d="M 20 55 L 60 25 L 100 55 Z" fill="#DC143C" stroke="#8B0000" strokeWidth="3" strokeLinejoin="round"/>
-        <rect x="30" y="55" width="60" height="50" fill="#FFE4B5" stroke="#8B4513" strokeWidth="3"/>
-        <rect x="50" y="75" width="20" height="30" fill="#8B4513" stroke="#654321" strokeWidth="2.5" rx="2"/>
-        <circle cx="63" cy="92" r="2" fill="#FFD700"/>
-        <rect x="38" y="63" width="12" height="12" fill="#87CEEB" stroke="#4682B4" strokeWidth="2"/>
-        <line x1="44" y1="63" x2="44" y2="75" stroke="#4682B4" strokeWidth="1.5"/>
-        <line x1="38" y1="69" x2="50" y2="69" stroke="#4682B4" strokeWidth="1.5"/>
-        <rect x="70" y="63" width="12" height="12" fill="#87CEEB" stroke="#4682B4" strokeWidth="2"/>
-        <line x1="76" y1="63" x2="76" y2="75" stroke="#4682B4" strokeWidth="1.5"/>
-        <line x1="70" y1="69" x2="82" y2="69" stroke="#4682B4" strokeWidth="1.5"/>
-        <rect x="72" y="35" width="10" height="18" fill="#8B4513" stroke="#654321" strokeWidth="2.5"/>
-        <rect x="70" y="33" width="14" height="5" fill="#654321" stroke="#654321" strokeWidth="2"/>
-        <circle cx="77" cy="25" r="3" fill="#B0B0B0" opacity="0.6"/>
-        <circle cx="80" cy="20" r="3.5" fill="#B0B0B0" opacity="0.5"/>
-        <circle cx="74" cy="20" r="3" fill="#B0B0B0" opacity="0.55"/>
-      </svg>
-    ),
-    'ג': (
-      <svg width="60" height="60" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-        <ellipse cx="25" cy="45" rx="12" ry="15" fill="#D2B48C" stroke="#8B7355" strokeWidth="3"/>
-        <ellipse cx="22" cy="38" rx="4" ry="7" fill="#D2B48C" stroke="#8B7355" strokeWidth="2"/>
-        <circle cx="27" cy="43" r="2.5" fill="#333"/>
-        <line x1="30" y1="52" x2="35" y2="52" stroke="#8B7355" strokeWidth="2" strokeLinecap="round"/>
-        <rect x="35" y="50" width="10" height="25" fill="#D2B48C" stroke="#8B7355" strokeWidth="3"/>
-        <ellipse cx="70" cy="70" rx="30" ry="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="3"/>
-        <ellipse cx="60" cy="55" rx="15" ry="18" fill="#C19A6B" stroke="#8B7355" strokeWidth="3"/>
-        <ellipse cx="82" cy="58" rx="13" ry="16" fill="#C19A6B" stroke="#8B7355" strokeWidth="3"/>
-        <rect x="52" y="85" width="6" height="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2.5"/>
-        <rect x="65" y="85" width="6" height="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2.5"/>
-        <rect x="78" y="85" width="6" height="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2.5"/>
-        <rect x="91" y="85" width="6" height="20" fill="#D2B48C" stroke="#8B7355" strokeWidth="2.5"/>
-        <ellipse cx="55" cy="107" rx="4" ry="3" fill="#8B7355"/>
-        <ellipse cx="68" cy="107" rx="4" ry="3" fill="#8B7355"/>
-        <ellipse cx="81" cy="107" rx="4" ry="3" fill="#8B7355"/>
-        <ellipse cx="94" cy="107" rx="4" ry="3" fill="#8B7355"/>
-        <path d="M 98 75 Q 110 80 115 90" stroke="#8B7355" strokeWidth="3" fill="none" strokeLinecap="round"/>
-        <path d="M 114 88 L 118 92 L 112 94" fill="#8B7355"/>
-      </svg>
-    )
-  };
-
-  const activities = [
-    { type: 'show', instruction: 'תראה את האותיות!<br/>זאת אות א, זאת אות ב, וזאת אות ג', letters: ['א', 'ב', 'ג'], colors: ['#fecaca', '#bfdbfe', '#bbf7d0'], showImages: true },
-    { type: 'find', instruction: 'לחץ על האות א', target: 'א', options: ['א', 'ב', 'ג'], showImages: true },
-    { type: 'find', instruction: 'לחץ על האות ב', target: 'ב', options: ['א', 'ב', 'ג'], showImages: true },
-    { type: 'find', instruction: 'לחץ על האות ג', target: 'ג', options: ['א', 'ב', 'ג'], showImages: true },
-    { type: 'find', instruction: 'מצא את האות א', target: 'א', options: ['ב', 'א', 'ג', 'ב'], showImages: false },
-    { type: 'find', instruction: 'מצא את האות ב', target: 'ב', options: ['א', 'ג', 'ב', 'א'], showImages: false },
-    { type: 'find', instruction: 'מצא את האות ג', target: 'ג', options: ['ב', 'א', 'ג', 'ב'], showImages: false },
-    { type: 'find', instruction: 'איפה האות א?', target: 'א', options: ['ג', 'ב', 'ב', 'א', 'ג', 'א'], showImages: false }
-  ];
-
-  const [currentActivity, setCurrentActivity] = useState(0);
-  const [hasAnswered, setHasAnswered] = useState(false);
-  const [feedback, setFeedback] = useState('');
-  const [answeredBoxes, setAnsweredBoxes] = useState([]);
-
-  const checkAnswer = (selected, target, index) => {
-    if (hasAnswered) return;
-    setHasAnswered(true);
-
-    if (selected === target) {
-      setAnsweredBoxes([{ index, correct: true }]);
-      setFeedback('🎉 כל הכבוד! 🎉');
-      setTimeout(() => {
-        nextActivity();
-      }, 2000);
-    } else {
-      setAnsweredBoxes([{ index, correct: false }]);
-      setFeedback('😊 נסה שוב');
-      setTimeout(() => {
-        setHasAnswered(false);
-        setAnsweredBoxes([]);
-        setFeedback('');
-      }, 1500);
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>לומדים א ב ג</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(180deg, #7b7bdc, #6a5fb5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
-  };
 
-  const nextActivity = () => {
-    if (currentActivity + 1 >= activities.length) {
-      setCurrentActivity(activities.length);
-    } else {
-      setCurrentActivity(currentActivity + 1);
-      setHasAnswered(false);
-      setFeedback('');
-      setAnsweredBoxes([]);
+    .card {
+      background: white;
+      border-radius: 24px;
+      width: 90%;
+      max-width: 420px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-  };
 
-  const restart = () => {
-    setCurrentActivity(0);
-    setHasAnswered(false);
-    setFeedback('');
-    setAnsweredBoxes([]);
-  };
+    h1 {
+      color: #4f46e5;
+      margin-bottom: 16px;
+    }
 
-  const activity = activities[currentActivity];
+    .instruction {
+      background: #fff4cc;
+      border: 3px solid #f59e0b;
+      border-radius: 16px;
+      padding: 12px;
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: #92400e;
+    }
 
-  if (currentActivity >= activities.length) {
-    return (
-      <div dir="rtl" style={{ fontFamily: 'Arial, sans-serif', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-        <div style={{ width: '100%', maxWidth: '500px', background: 'white', borderRadius: '30px', padding: '30px 20px', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
-          <h1 style={{ textAlign: 'center', color: '#5a67d8', fontSize: '2em', marginBottom: '10px', textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>🌟 לומדים א ב ג 🌟</h1>
-          <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-            <div style={{ fontSize: '4em', margin: '20px 0' }}>⭐⭐⭐</div>
-            <h2 style={{ fontSize: '2.5em', color: '#059669', margin: '20px 0' }}>כל הכבוד!</h2>
-            <p style={{ fontSize: '1.5em', margin: '20px 0' }}>למדת את האותיות:<br/><span style={{ fontSize: '2em', fontWeight: 'bold' }}>א ב ג</span></p>
-            <button onClick={restart} style={{ background: '#8b5cf6', color: 'white', border: 'none', padding: '20px 40px', borderRadius: '15px', fontSize: '1.5em', fontWeight: 'bold', cursor: 'pointer', marginTop: '30px', boxShadow: '0 4px 15px rgba(139, 92, 246, 0.4)' }}>שחק שוב 🔄</button>
-          </div>
-        </div>
+    .letters {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .letter-box {
+      flex: 1;
+      border-radius: 16px;
+      padding: 16px 8px;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .a { background: #ffd6d6; }
+    .b { background: #cfe5ff; }
+    .g { background: #ccfbe6; }
+
+    .icon {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    button {
+      background: #10b981;
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .progress {
+      margin-top: 12px;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>⭐ לומדים א ב ג ⭐</h1>
+
+    <div class="instruction">
+      תראה את האותיות!<br>
+      זאת אות א, זאת אות ב, וזאת אות ג
+    </div>
+
+    <div class="letters">
+      <div class="letter-box g">
+        <div class="icon">🐫</div>
+        ג
       </div>
-    );
-  }
-
-  return (
-    <div dir="rtl" style={{ fontFamily: 'Arial, sans-serif', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
-      <div style={{ width: '100%', maxWidth: '500px', background: 'white', borderRadius: '30px', padding: '30px 20px', boxShadow: '0 20px 60px rgba(0,0,0,0.3)' }}>
-        <h1 style={{ textAlign: 'center', color: '#5a67d8', fontSize: '2em', marginBottom: '10px', textShadow: '2px 2px 4px rgba(0,0,0,0.1)' }}>🌟 לומדים א ב ג 🌟</h1>
-        
-        <div style={{ background: '#fef3c7', padding: '20px', borderRadius: '15px', margin: '20px 0', border: '3px solid #f59e0b', textAlign: 'center' }}>
-          <div style={{ fontSize: '1.5em', color: '#92400e', fontWeight: 'bold', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: activity.instruction }} />
-        </div>
-
-        {activity.type === 'show' ? (
-          <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '20px', margin: '30px 0' }}>
-              {activity.letters.map((letter, i) => (
-                <div key={i} style={{ aspectRatio: '1', background: activity.colors[i], border: `5px solid ${activity.colors[i]}`, borderRadius: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', fontSize: '4em', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', padding: '10px' }}>
-                  {activity.showImages && (
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
-                      {svgImages[letter]}
-                      <div>{letter}</div>
-                    </div>
-                  )}
-                  {!activity.showImages && letter}
-                </div>
-              ))}
-            </div>
-            <button onClick={nextActivity} style={{ background: '#10b981', color: 'white', border: 'none', padding: '20px 40px', borderRadius: '15px', fontSize: '1.5em', fontWeight: 'bold', cursor: 'pointer', display: 'block', margin: '20px auto', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.4)' }}>המשך ➜</button>
-          </>
-        ) : (
-          <>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '20px', margin: '30px 0' }}>
-              {activity.options.map((letter, i) => {
-                const answeredBox = answeredBoxes.find(box => box.index === i);
-                const boxStyle = {
-                  aspectRatio: '1',
-                  background: answeredBox ? (answeredBox.correct ? '#86efac' : '#fca5a5') : 'white',
-                  border: answeredBox ? (answeredBox.correct ? '5px solid #16a34a' : '5px solid #dc2626') : '5px solid #cbd5e1',
-                  borderRadius: '20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '4em',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-                  padding: '10px',
-                  transition: 'all 0.3s'
-                };
-
-                return (
-                  <div key={i} style={boxStyle} onClick={() => checkAnswer(letter, activity.target, i)}>
-                    {activity.showImages ? (
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
-                        {svgImages[letter]}
-                        <div>{letter}</div>
-                      </div>
-                    ) : letter}
-                  </div>
-                );
-              })}
-            </div>
-            <div style={{ textAlign: 'center', fontSize: '3em', margin: '20px 0', minHeight: '60px' }}>{feedback}</div>
-          </>
-        )}
-
-        <div style={{ textAlign: 'center', fontSize: '1.2em', color: '#6b7280', marginTop: '20px' }}>
-          פעילות {currentActivity + 1} מתוך {activities.length}
-        </div>
+      <div class="letter-box b">
+        <div class="icon">🏠</div>
+        ב
+      </div>
+      <div class="letter-box a">
+        <div class="icon">🦁</div>
+        א
       </div>
     </div>
-  );
-};
 
-export default HebrewLearningGame;
+    <button>➡ המשך</button>
+
+    <div class="progress">
+      פעילות 1 מתוך 8
+    </div>
+  </div>
+</body>
+</html>
